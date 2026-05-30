@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discord Chat Log Generator</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="workspace" aria-label="Discord chat log generator">
+        <header class="topbar">
+          <div class="title-block">
+            <p class="eyebrow">Streamer chat log studio</p>
+            <h1>디스코드 채팅 내역 생성기</h1>
+          </div>
+          <div class="top-actions">
+            <label class="button" for="csvInput">
+              CSV
+              <input id="csvInput" type="file" accept=".csv,text/csv" />
+            </label>
+            <button id="exportPng" class="button primary" type="button">PNG</button>
+            <button id="exportVideo" class="button" type="button">WebM</button>
+          </div>
+        </header>
+
+        <nav class="mobile-tabs" aria-label="작업 영역">
+          <button class="mobile-tab active" type="button" data-mobile-tab="compose">대화</button>
+          <button class="mobile-tab" type="button" data-mobile-tab="profiles">프로필</button>
+          <button class="mobile-tab" type="button" data-mobile-tab="preview">미리보기</button>
+        </nav>
+
+        <div class="layout">
+          <aside class="panel compose-panel mobile-section active" data-mobile-section="compose">
+            <div class="panel-title">
+              <div>
+                <h2>대화 입력</h2>
+                <p>직접 입력하거나 CSV 열을 매핑하세요.</p>
+              </div>
+              <button id="loadSample" class="ghost" type="button">샘플</button>
+            </div>
+
+            <div class="control-grid">
+              <label>
+                채널명
+                <input id="channelName" type="text" value="합방-대기실" />
+              </label>
+              <label class="wide">
+                대화 내용
+                <textarea id="chatInput" spellcheck="false"></textarea>
+              </label>
+            </div>
+
+            <p class="hint">형식: 이름: 메시지. CSV를 불러오면 이름/메시지/시간 열을 선택할 수 있습니다.</p>
+
+            <div id="csvTools" class="csv-tools" hidden>
+              <div class="field-row">
+                <label>
+                  이름 열
+                  <select id="nameColumn"></select>
+                </label>
+                <label>
+                  메시지 열
+                  <select id="messageColumn"></select>
+                </label>
+              </div>
+              <label>
+                시간 열
+                <select id="timeColumn"></select>
+              </label>
+            </div>
+          </aside>
+
+          <aside class="panel profiles-panel mobile-section" data-mobile-section="profiles">
+            <div class="panel-title">
+              <div>
+                <h2>프로필</h2>
+                <p>이름과 프로필 사진을 설정합니다.</p>
+              </div>
+              <button id="addProfile" class="ghost" type="button">추가</button>
+            </div>
+            <div id="profileList" class="profile-list"></div>
+          </aside>
+
+          <section class="preview-panel mobile-section" data-mobile-section="preview">
+            <div class="preview-head">
+              <div>
+                <h2>미리보기</h2>
+                <p id="statusText">0개 메시지</p>
+              </div>
+              <div class="preview-tools">
+                <button id="playPreview" class="icon-button" type="button" aria-label="재생">▶</button>
+                <label class="range-control">
+                  진행
+                  <input id="previewScrubber" type="range" min="0" max="5" value="5" />
+                </label>
+                <label class="range-control">
+                  폭
+                  <input id="chatWidth" type="range" min="520" max="920" value="720" />
+                </label>
+              </div>
+            </div>
+
+            <section id="discordFrame" class="discord-frame" aria-label="Discord chat preview">
+              <header class="discord-titlebar">
+                <span class="hash">#</span>
+                <strong id="channelTitle">합방-대기실</strong>
+              </header>
+              <div id="messageList" class="message-list"></div>
+            </section>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
