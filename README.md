@@ -5,7 +5,7 @@
 ## 실행
 
 ```bash
-python3 -m http.server 5173
+https://chat-log-studio.vercel.app
 ```
 
 브라우저에서 `(https://chat-log-studio.vercel.app/)`을 엽니다.
