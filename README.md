@@ -8,7 +8,7 @@
 python3 -m http.server 5173
 ```
 
-브라우저에서 `http://localhost:5173`을 엽니다.
+브라우저에서 `(https://chat-log-studio.vercel.app/)`을 엽니다.
 
 ## 대화 입력 형식
 
